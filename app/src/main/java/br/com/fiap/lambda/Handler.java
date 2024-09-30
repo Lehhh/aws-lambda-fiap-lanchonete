@@ -37,11 +37,11 @@ public class Handler implements
         try {
             login = objectMapper.readValue(request.getBody(), LoginRequest.class);
 
+            String url = System.getenv("api");
+            
+            RestTemplate restTemplate = new RestTemplate();
 
-        RestTemplate restTemplate = new RestTemplate();
-            String url = "localhost:8080/rest/api/v1/clientes/";
-
-            ResponseEntity<ClienteResponse> response = restTemplate.getForEntity(url + login, ClienteResponse.class);
+            ResponseEntity<ClienteResponse> response = restTemplate.getForEntity(url + "v1/clientes" + login.cpf(), ClienteResponse.class);
 
             if (Objects.nonNull(response.getBody())) {
                 isAuthorized = true;
