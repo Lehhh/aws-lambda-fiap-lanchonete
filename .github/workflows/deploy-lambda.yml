@@ -29,7 +29,7 @@ jobs:
           aws lambda create-function \
             --function-name my-lambda-function \
             --runtime java11 \
-            --role arn:aws:iam::737021845667:role/lambda-code-commit-role-6osw7e60 \
+            --role arn:aws:iam::737021845667:role/admin-lambda \
             --handler com.example.MyHandler::handleRequest \
             --zip-file fileb://lambda_function.zip \
             --region us-east-1
