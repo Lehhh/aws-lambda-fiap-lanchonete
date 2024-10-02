@@ -26,9 +26,13 @@ jobs:
 
       - name: Deploy Lambda Function
         run: |
-          aws lambda update-function-code \
+          aws lambda create-function \
             --function-name my-lambda-function \
-            --zip-file fileb://lambda_function.zip
+            --runtime java11 \
+            --role arn:aws:iam::737021845667:role/root \
+            --handler index.handler \
+            --zip-file fileb://lambda_function.zip \
+            --region us-east-1
 
       - name: Invoke Lambda Function
         run: |
