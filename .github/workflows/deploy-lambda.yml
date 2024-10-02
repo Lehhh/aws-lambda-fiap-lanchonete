@@ -1,0 +1,38 @@
+name: Deploy Lambda Function
+
+# Esse fluxo será acionado sempre que houver um push na branch 'main'
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Zip Lambda Function
+        run: zip -r lambda_function.zip .
+
+      - name: Deploy Lambda Function
+        run: |
+          aws lambda update-function-code \
+            --function-name my-lambda-function \
+            --zip-file fileb://lambda_function.zip
+
+      - name: Invoke Lambda Function
+        run: |
+          aws lambda invoke \
+            --function-name my-lambda-function \
+            --payload '{}' \
+            response.json
