@@ -30,6 +30,6 @@ jobs:
             --function-name my-lambda-function \
             --runtime java11 \
             --role arn:aws:iam::737021845667:role/admin-lambda \
-            --handler com.example.MyHandler::handleRequest \
+            --handler br.com.fiap.lambda.Handler::handleRequest \
             --zip-file fileb://lambda_function.zip \
             --region us-east-1
