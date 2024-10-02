@@ -28,7 +28,7 @@ jobs:
         run: |
           aws lambda create-function \
             --function-name my-lambda-function \
-            --runtime java21 \
+            --runtime java11 \
             --role arn:aws:iam::737021845667:role/root \
             --handler index.handler \
             --zip-file fileb://lambda_function.zip \
