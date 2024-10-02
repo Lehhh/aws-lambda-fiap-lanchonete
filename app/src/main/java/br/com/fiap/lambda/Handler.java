@@ -37,7 +37,7 @@ public class Handler implements
         try {
             login = objectMapper.readValue(request.getBody(), LoginRequest.class);
 
-            String url = System.getenv("api");
+            String url = "http://ae63c76d1fd844baf96383db84585dbf-862575295.us-east-1.elb.amazonaws.com:8080/";
             
             RestTemplate restTemplate = new RestTemplate();
 
